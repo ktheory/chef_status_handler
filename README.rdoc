@@ -1,0 +1,22 @@
+chef_status_handler: a Chef Handler for the chef_status web server
+
+* Reports successful and failed chef client runs to a central server
+
+== Getting Started
+
+  gem install chef_status_handler
+
+In your client.rb:
+
+
+  require 'chef_status_handler'
+
+  my_handler = Medidata::ChefStatusHandler.new
+  my_handler.url = 'http://example.com/chef_reports.json' # No authentication
+  my_handler.url = 'http://user:password@example.com/chef_reports.json' # Basic auth
+
+  # Configure Chef to use your handler to notify you of failed chef runs
+  exception_handlers << my_handler
+  # Notify on successful runs
+  report_handlers << my_handler
+
